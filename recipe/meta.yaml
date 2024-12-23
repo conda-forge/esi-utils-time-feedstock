@@ -6,20 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/esi-utils-time-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/esi-utils-time-{{ version }}.tar.gz
   sha256: fcb7f32bf27d9be3b9bc9c2de1e86d3f09095961857263b1276261827034bfb9
 
 build:
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 1
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
+    - setuptools
     - pip
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - bs4 >=0.0.1
     - fiona >=1.8
     - numpy >=1.21
@@ -29,6 +30,8 @@ requirements:
     - pytz >=2022.1
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - esi_utils_time
   # pip check cannot recognize beautifulsoup4 is bs4 :-/
