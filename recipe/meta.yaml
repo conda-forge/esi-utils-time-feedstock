@@ -1,18 +1,18 @@
 {% set name = "esi-utils-time" %}
-{% set version = "1.0.2" %}
+{% set version = "1.0.3" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/esi-utils-time-{{ version }}.tar.gz
-  sha256: fcb7f32bf27d9be3b9bc9c2de1e86d3f09095961857263b1276261827034bfb9
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name | replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 94d6eeba927d5588a964eb98877c9f7e3004a9b28d3df1f77cd6e2e373315928
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
